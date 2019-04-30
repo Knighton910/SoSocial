@@ -10,7 +10,7 @@ const routes = require('./routes');
 
 const app = express()
 
-mongoose.connect('')
+mongoose.connect('mongodb://localhost:27017/familyNetworkDB')
 
 app.set('port', process.env.PORT || 3000)
 
