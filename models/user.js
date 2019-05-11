@@ -12,19 +12,23 @@ const userSchema = mongoose.Schema({
        bio: String
 });
 
-const noop = () => {};
+const noop = function () {};
 
-userSchema.pre('save', (done) => {
-   const user = this;
+// UserSchema.pre('save', function(next){})
+
+userSchema.pre('save', function (done) {
+   let user = this;
 
    if (!user.isModified('password')) {
        return done()
    }
 
+   /*** @desc :Hash the password for the Database
+    * storing the users password securely */
    // Generates a salt for the hash, and calls the inner func once completed
-    bcrypt.genSalt(SALT_FACTOR, (err, salt) => {
+    bcrypt.genSalt(SALT_FACTOR, function (err, salt) {
         if (err) { return done(err); }
-        bcrypt.hash(user.password, salt, noop, (err, hashedPassword) => {
+        bcrypt.hash(user.password, salt, noop, function (err, hashedPassword) {
             if (err) {return done(err); }
             user.password = hashedPassword
             done()
@@ -32,13 +36,13 @@ userSchema.pre('save', (done) => {
     });
 });
 
-userSchema.methods.checkPassword = (guess, done) => {
-    bcrypt.compare(guess, this.password, (err, isMatch) => {
+userSchema.methods.checkPassword = function (guess, done) {
+    bcrypt.compare(guess, this.password, function (err, isMatch) {
         done(err, isMatch)
     })
 };
 
-userSchema.methods.name = () => {
+userSchema.methods.name = function () {
     return this.displayName || this.username
 }
 

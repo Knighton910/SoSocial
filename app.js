@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const flash = require('connect-flash')
 
+// importing the external routes
 const routes = require('./routes');
 
 const app = express()
@@ -13,7 +14,6 @@ const app = express()
 mongoose.connect('mongodb://localhost:27017/familyNetworkDB')
 
 app.set('port', process.env.PORT || 3000)
-
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
