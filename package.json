@@ -4,7 +4,7 @@
   "description": "so social, a network for you family",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "start": "nodemon app.js"
   },
   "keywords": [],
@@ -23,6 +23,8 @@
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
-    "nodemon": "^1.18.11"
+    "nodemon": "^1.18.11",
+    "chai": "^1.9.2",
+    "mocha": "^2.0.1"
   }
 }
